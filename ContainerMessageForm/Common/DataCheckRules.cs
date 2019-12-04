@@ -91,7 +91,7 @@ namespace ContainerMessageForm
 
             if (!msgTypeDic.Keys.Contains(msgType))
             {
-                checkResult = "发送的报文类型不正确";
+                checkResult = "发送的报文类型不正确："+msgType+"。";
             }
             return checkResult;
         }
@@ -113,7 +113,7 @@ namespace ContainerMessageForm
 
             if (!customsCodeDic.Keys.Contains(customsCode))
             {
-                checkResult += "发送报文的海关代码非南京关区。";
+                checkResult += "发送报文的海关代码非南京关区："+customsCode+"。";
             }
             return checkResult;
         }
@@ -135,7 +135,7 @@ namespace ContainerMessageForm
 
             if (!supvLoctInfo.Keys.Contains(supvLoctCode))
             {
-                checkResult += "报文中的作业场所代码未备案。";
+                checkResult += "报文中的作业场所代码未备案："+supvLoctCode+"。";
             }
             return checkResult;
         }
@@ -161,7 +161,7 @@ namespace ContainerMessageForm
             }
             catch (Exception ex)
             {
-                checkResult += "报文中报文发送时间的格式不对。" + ex.Message;
+                checkResult += "报文中报文发送时间的格式不对："+declDate+"。" + ex.Message+"。";
             }           
             return checkResult;
         }
@@ -183,7 +183,7 @@ namespace ContainerMessageForm
 
             if (!declareDataTypeDic.Keys.Contains(declareDataType))
             {
-                checkResult += "报文中的申报数据类型不是全量或者增量。";
+                checkResult += "报文中的申报数据类型不是全量或者增量："+declareDataType+"。";
             }
             return checkResult;
         }
@@ -208,14 +208,14 @@ namespace ContainerMessageForm
                 //数字组成校验
                 if (!CommFuction.CheckIsNumber(totalMsgNo))
                 {
-                    checkResult += "发送的报文中TotalMsgNo字段值包含非数字字符";
+                    checkResult += "发送的报文中TotalMsgNo字段值包含非数字字符："+totalMsgNo+"。";
                 }
                 else
                 {
                     //发送的报文数量校验
                     if (!totalMsgNo.Equals(filesCount))
                     {
-                        checkResult += "报文发送的数量少于总数。";
+                        checkResult += "报文发送的数量少于总数："+totalMsgNo+"。";
                     }
                 }
             }
@@ -243,7 +243,7 @@ namespace ContainerMessageForm
                 //数字组成校验
                 if (!CommFuction.CheckIsNumber(curMsgNo))
                 {
-                    checkResult += "发送的报文中CurMsgNo字段值包含非数字字符";
+                    checkResult += "发送的报文中CurMsgNo字段值包含非数字字符："+curMsgNo+"。";
                 }
                 else
                 {
@@ -252,7 +252,7 @@ namespace ContainerMessageForm
                     {
                         if (!(int.Parse(curMsgNo) > 0 && int.Parse(curMsgNo) <= int.Parse(totalMsgNo)))
                         {
-                            checkResult += "发送报文中的CurMsgNo填写不正确。";
+                            checkResult += "发送报文中的CurMsgNo填写不正确："+curMsgNo+"。";
                         }
                     }
                     catch (Exception ex)
@@ -286,7 +286,7 @@ namespace ContainerMessageForm
             {
                 if(!CommFuction.CheckIsNumberAndLetter(contaId))
                 {
-                    checkResult += "该集装箱的ContaId中包含非数字和字母的字符";
+                    checkResult += "该集装箱的ContaId中包含非数字和字母的字符："+contaId+"。";
                 }
             }
 
@@ -311,7 +311,7 @@ namespace ContainerMessageForm
             {
                 if(!contaTypeCodeDic.Keys.Contains(contaTypeCode))
                 {
-                    checkResult += "该集装箱的的ContaTypeCode节点值不是标准的集装箱尺寸";
+                    checkResult += "该集装箱的的ContaTypeCode节点值不是标准的集装箱尺寸："+contaTypeCode+"。";
                 }
             }
 
@@ -335,7 +335,7 @@ namespace ContainerMessageForm
             {
                 if(!CommFuction.CheckSeat(seat))
                 {
-                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9中的数字。";
+                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9中的数字："+seat+"。";
                 }
             }
             return checkResult;
@@ -359,7 +359,7 @@ namespace ContainerMessageForm
             {
                 if (!tradeMarkDic.Keys.Contains(tradeMark))
                 {
-                    checkResult += "该集装箱的的TradeMark节点值不是D、I或者O。";
+                    checkResult += "该集装箱的的TradeMark节点值不是D、I或者O："+tradeMark+"。";
                 }
             }
             return checkResult;
@@ -386,7 +386,7 @@ namespace ContainerMessageForm
             {
                 if(!iEFlagDic.Keys.Contains(iEFlag))
                 {
-                    checkResult += "该集装箱的的IEFlag节点值不是I或者E。";
+                    checkResult += "该集装箱的的IEFlag节点值不是I或者E："+iEFlag+"。";
                 }
             }
             return checkResult;
@@ -408,7 +408,7 @@ namespace ContainerMessageForm
             {
                 if(!loadMarkDic.Keys.Contains(loadMark))
                 {
-                    checkResult += "该集装箱的的IEFlag节点值不是E或者F。";
+                    checkResult += "该集装箱的的IEFlag节点值不是E或者F："+loadMark+"。";
                 }
             }
             return checkResult;
@@ -430,7 +430,7 @@ namespace ContainerMessageForm
             {
                 if(!workMarkDic.Keys.Contains(workMark))
                 {
-                    checkResult += "该集装箱的的WorkMark节点值不是A、B、C、D、E或者F。";
+                    checkResult += "该集装箱的的WorkMark节点值不是A、B、C、D、E或者F："+workMark+"。";
                 }
             }
             return checkResult;
@@ -454,7 +454,7 @@ namespace ContainerMessageForm
             {
                 if(!dataDealFlagDic.Keys.Contains(dataDealFlag))
                 {
-                    checkResult += "该集装箱的的DataDealFlag节点值不是A、M或者D。";
+                    checkResult += "该集装箱的的DataDealFlag节点值不是A、M或者D："+dataDealFlag+"。";
                 }
                 else
                 {

@@ -42,6 +42,7 @@ namespace ContainerMessageForm
 
                 //获取选择的文件夹的路径
                 this.textBox_Folder.Text = folderBrowserDialog.SelectedPath;
+                this.textBox_Folder.Refresh();
 
                 DirectoryInfo directoryInfo = new DirectoryInfo(folderBrowserDialog.SelectedPath);
 
@@ -54,6 +55,7 @@ namespace ContainerMessageForm
                     {
                         //获取文件夹（不包含子目录）下的xml文件个数
                         this.textBox_totalFileCount.Text = fileInfoArray.Length.ToString();
+                        this.textBox_totalFileCount.Refresh();
                     }
 
                     XmlDocument xmlDocument = new XmlDocument();
