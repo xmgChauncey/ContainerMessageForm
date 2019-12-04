@@ -14,7 +14,12 @@ namespace ContainerMessageForm
         Dictionary<string, string> msgTypeDic = DataBaseOperate.GetCodeAndExplanationByCategory("MsgType");
         Dictionary<string, string> customsCodeDic = DataBaseOperate.GetNanjingCustomsInfo();
         Dictionary<string, string> declareDataTypeDic = DataBaseOperate.GetCodeAndExplanationByCategory("DeclareDataType");
-        Dictionary<string, string> contaTypeCOdeDic = DataBaseOperate.GetCodeAndExplanationByCategory("ContaTypeCode");
+        Dictionary<string, string> contaTypeCodeDic = DataBaseOperate.GetCodeAndExplanationByCategory("ContaTypeCode");
+        Dictionary<string, string>tradeMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("TradeMark");
+        Dictionary<string, string> iEFlagDic = DataBaseOperate.GetCodeAndExplanationByCategory("IEFlag");
+        Dictionary<string, string> loadMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("LoadMark");
+        Dictionary<string, string> workMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("WorkMark");
+        Dictionary<string, string> dataDealFlagDic = DataBaseOperate.GetCodeAndExplanationByCategory("DataDealFlag");
 
         #region 报文中Head节点的子节点校验
         /// <summary>
@@ -296,18 +301,184 @@ namespace ContainerMessageForm
         public string CheckDataContaTypeCode(string contaTypeCode)
         {
             string checkResult = string.Empty;
-            if(!string.IsNullOrEmpty(contaTypeCode))
+
+            //是否为空校验
+            if(string.IsNullOrEmpty(contaTypeCode))
             {
                 checkResult += "该集装箱的的ContaTypeCode节点值为空";
             }
             else
             {
-                if(!contaTypeCOdeDic.Keys.Contains(contaTypeCode))
+                if(!contaTypeCodeDic.Keys.Contains(contaTypeCode))
                 {
                     checkResult += "该集装箱的的ContaTypeCode节点值不是标准的集装箱尺寸";
                 }
             }
 
+            return checkResult;
+        }
+
+        /// <summary>
+        /// 校验报文中Data节点下Seat节点数据
+        /// </summary>
+        /// <param name="seat"></param>
+        /// <returns></returns>
+        public string CheckDataSeat(string seat)
+        {
+            string checkResult = string.Empty;
+
+            if(string.IsNullOrEmpty(seat))
+            {
+                checkResult += "该集装箱的的Seat节点值为空";
+            }
+            else
+            {
+                if(!CommFuction.CheckSeat(seat))
+                {
+                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9中的数字。";
+                }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        /// 校验报文中Data节点下TradeMark节点数据
+        /// </summary>
+        /// <param name="tradeMark"></param>
+        /// <returns></returns>
+        public string CheckDataTradeMark(string tradeMark)
+        {
+            string checkResult = string.Empty;
+
+            //是否为空校验
+            if (string.IsNullOrEmpty(tradeMark))
+            {
+                checkResult += "该集装箱的的TradeMark节点值为空";
+            }
+            else
+            {
+                if (!tradeMarkDic.Keys.Contains(tradeMark))
+                {
+                    checkResult += "该集装箱的的TradeMark节点值不是D、I或者O。";
+                }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        /// 校验报文中Data节点下IEFlag节点数据
+        /// </summary>
+        /// <param name="tradeMark"></param>
+        /// <param name="iEFlag"></param>
+        /// <returns></returns>
+        public string CheckDataIEFlag(string tradeMark,string iEFlag)
+        {
+            string checkResult = string.Empty;
+            if(tradeMark.Equals("I"))
+            {
+                if(string.IsNullOrEmpty(iEFlag))
+                {
+                    checkResult += "当集装箱为外贸时，进出口标识不能为空。";
+                }
+            }
+
+            if(!string.IsNullOrEmpty(iEFlag))
+            {
+                if(!iEFlagDic.Keys.Contains(iEFlag))
+                {
+                    checkResult += "该集装箱的的IEFlag节点值不是I或者E。";
+                }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        ///  校验报文中Data节点下LoadMark节点数据
+        /// </summary>
+        /// <param name="loadMark"></param>
+        /// <returns></returns>
+        public string CheckDataLoadMark(string loadMark)
+        {
+            string checkResult = string.Empty;
+            if(string.IsNullOrEmpty(loadMark))
+            {
+                checkResult += "该集装箱的的LoadMark节点值为空。";
+            }
+            else
+            {
+                if(!loadMarkDic.Keys.Contains(loadMark))
+                {
+                    checkResult += "该集装箱的的IEFlag节点值不是E或者F。";
+                }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        /// 校验报文中Data节点下WorkMark节点数据
+        /// </summary>
+        /// <param name="workMark"></param>
+        /// <returns></returns>
+        public string CheckDataWorkMark(string workMark)
+        {
+            string checkResult = string.Empty;
+            if(string.IsNullOrEmpty(workMark))
+            {
+                checkResult += "该集装箱的的WorkMark节点值为空。";
+            }
+            else
+            {
+                if(!workMarkDic.Keys.Contains(workMark))
+                {
+                    checkResult += "该集装箱的的WorkMark节点值不是A、B、C、D、E或者F。";
+                }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        /// 校验报文中Data节点下DataDealFlag、EntranceDate和DeparttureDate节点数据
+        /// </summary>
+        /// <param name="dataDealFlag"></param>
+        /// <param name="entranceDate"></param>
+        /// <param name="departtureDate"></param>
+        /// <returns></returns>
+        public string CheckDataDataDealFlag(string dataDealFlag,string entranceDate,string departtureDate)
+        {
+            string checkResult = string.Empty;
+            if(string.IsNullOrEmpty(dataDealFlag))
+            {
+                checkResult += "该集装箱的的DataDealFlag节点值为空。";
+            }
+            else
+            {
+                if(!dataDealFlagDic.Keys.Contains(dataDealFlag))
+                {
+                    checkResult += "该集装箱的的DataDealFlag节点值不是A、M或者D。";
+                }
+                else
+                {
+                    switch(dataDealFlag)
+                    {
+                        case "D":
+                            if(string.IsNullOrEmpty(entranceDate)&&string.IsNullOrEmpty(departtureDate))
+                            {
+                                checkResult += "当该集装箱的的DataDealFlag为D时，进出场时间不能为空。";
+                            }
+                            break;
+                        default:
+                            if(string.IsNullOrEmpty(entranceDate))
+                            {
+                                checkResult += "该集装箱的的EntranceDate节点值不能为空。";
+                            }
+                            if(!string.IsNullOrEmpty(departtureDate))
+                            {
+                                checkResult += "当该集装箱的的DataDealFlag为A或者M时，该集装箱的的EntranceDate节点值应该为空。";
+                            }
+                            break;
+                    }
+                }
+            }
             return checkResult;
         }
         #endregion

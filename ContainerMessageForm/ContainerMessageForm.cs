@@ -160,8 +160,51 @@ namespace ContainerMessageForm
 
                             //校验报文中的Data节点下的ContaTypeCode节点数据
                             checkResult += dataCheckRules.CheckDataContaTypeCode(csaData.ContaTypeCode);
+
+                            //校验报文中的Data节点下的Seat节点数据
+                            checkResult += dataCheckRules.CheckDataSeat(csaData.Seat);
+
+                            //校验报文中的Data节点下的TradeMark节点数据
+                            checkResult += dataCheckRules.CheckDataTradeMark(csaData.TradeMark);
+
+                            //校验报文中的Data节点下的IEFlag节点数据
+                            checkResult += dataCheckRules.CheckDataIEFlag(csaData.TradeMark,csaData.IEFlag);
+
+                            //校验报文中的Data节点下的LoadMark节点数据
+                            checkResult += dataCheckRules.CheckDataLoadMark(csaData.LoadMark);
+
+                            //校验报文中的Data节点下的DataDealFlag节点数据
+                            checkResult += dataCheckRules.CheckDataDataDealFlag(csaData.DataDealFlag, csaData.EntranceDate, csaData.DeparttureDate);
+
+                            //校验报文中的Data节点下的WorkMark节点数据
+                            checkResult += dataCheckRules.CheckDataWorkMark(csaData.WorkMark);
                             #endregion
+
+                            if(string.IsNullOrEmpty(checkResult))
+                            {
+                                try
+                                {
+                                    DataBaseOperate.InsertDataIntoCsaData(csaData, csaHead.MsgId);
+                                }
+                                catch(Exception ex)
+                                {
+                                    logContent.MsgId = csaHead.MsgId;
+                                    logContent.FilePath = fileInfo.FullName;
+                                    logContent.ContaId = csaData.ContaId;
+                                    logContent.ErrorDescription = ex.Message;
+                                    log.Error(logContent);
+                                }                               
+                            }
+                            else
+                            {
+                                logContent.MsgId = csaHead.MsgId;
+                                logContent.FilePath = fileInfo.FullName;
+                                logContent.ContaId = csaData.ContaId;
+                                logContent.ErrorDescription = checkResult;
+                                log.Error(logContent);
+                            }
                         }
+
                         #endregion
                     }
                 }

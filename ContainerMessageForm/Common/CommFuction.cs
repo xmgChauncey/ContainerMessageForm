@@ -40,5 +40,21 @@ namespace ContainerMessageForm.Common
             }
             return regex.IsMatch(checkedString);
         }
+
+        /// <summary>
+        /// 验证箱位的组成00/000/000/00
+        /// </summary>
+        /// <param name="seat"></param>
+        /// <returns></returns>
+        public  static bool CheckSeat(string seat)
+        {
+            Regex regex = new Regex(@"^\d{2}/\d{3}/\d{3}/\d{2}$");
+            if(string.IsNullOrEmpty(seat))
+            {
+                return false;
+            }
+
+            return regex.IsMatch(seat);
+        }
     }
 }

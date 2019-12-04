@@ -77,5 +77,40 @@ VALUES
                 SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSqlStr);
             }
         }
+
+        public static void InsertDataIntoCsaData(CsaData csaData,string msgId)
+        {
+            if (csaData != null)
+            {
+                string insertSqlStr = string.Format(@"INSERT INTO CsaData (
+GUID,
+MSGID,
+CONTAID,
+CONTATYPECODE,
+SEAT,
+TRADEMARK,
+IEFLAG,
+CONTAMARK,
+LOADMARK,
+DANGERMARK,
+ENTRANCEDATE,
+DEPARTTUREDATE,
+WORKMARK,
+DATADEALFLAG,
+BILLNO,
+ENTRYID,
+PRENO,
+MTAPPLYBLNO,
+REMARK 
+)
+VALUES
+	( NEWID ( ),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}' ) ", 
+    msgId,csaData.ContaId, csaData.ContaTypeCode, csaData.Seat, csaData.TradeMark, csaData.IEFlag, csaData.ContaMark,
+    csaData.LoadMark,csaData.DangerMark, csaData.EntranceDate, csaData.DeparttureDate, csaData.WorkMark, csaData.DataDealFlag,
+    csaData.BillNo, csaData.EntryId, csaData.PreNo, csaData.MtApplyBlNo, csaData.Remark);
+
+                SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSqlStr);
+            }
+        }
     }
 }
