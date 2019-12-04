@@ -443,7 +443,7 @@ namespace ContainerMessageForm
         /// <param name="entranceDate"></param>
         /// <param name="departtureDate"></param>
         /// <returns></returns>
-        public string CheckDataDataDealFlag(string dataDealFlag,string entranceDate,string departtureDate)
+        public string CheckDataDataDealFlag(string filePath,string dataDealFlag,string entranceDate,string departtureDate,string contaId)
         {
             string checkResult = string.Empty;
             if(string.IsNullOrEmpty(dataDealFlag))
@@ -473,7 +473,7 @@ namespace ContainerMessageForm
                             }
                             if(!string.IsNullOrEmpty(departtureDate))
                             {
-                                checkResult += "当该集装箱的的DataDealFlag为A或者M时，该集装箱的的EntranceDate节点值应该为空。";
+                                checkResult += "当该集装箱的的DataDealFlag为A或者M时，该集装箱的的DeparttureDate节点值应该为空。";
                             }
                             break;
                     }

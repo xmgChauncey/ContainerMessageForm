@@ -72,7 +72,7 @@ namespace ContainerMessageForm
 
                         #region 校验报文中Head节点的子节点数据
                         //获取Head节点及子节点数据
-                        XmlNodeList xmlNodeListHead = xmlDocument.SelectNodes("/ContaDeclareInfo/Head");
+                        XmlNodeList xmlNodeListHead = xmlDocument.SelectNodes("ContaDeclareInfo/Head");
                         foreach (XmlElement xmlElement in xmlNodeListHead)
                         {
                             //校验Head节点的MsgId节点数据
@@ -115,7 +115,7 @@ namespace ContainerMessageForm
                                 //报文中Head节点下子节点数据插入CsaHead表中
                                 DataBaseOperate.InsertDataIntoCsaHead(csaHead);
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 logContent.MsgId = csaHead.MsgId;
                                 logContent.FilePath = fileInfo.FullName;
@@ -129,31 +129,36 @@ namespace ContainerMessageForm
                             logContent.FilePath = fileInfo.FullName;
                             logContent.ErrorDescription = checkResult;
                             log.Error(logContent);
+
+                            checkResult = string.Empty;
                         }
                         #endregion
 
                         #region 校验报文中Data节点的子节点数据
-                        XmlNodeList xmlNodeListData = xmlDocument.SelectNodes("/ContaDeclareInfo/Declaration/Data");
-                        foreach (XmlElement xmlElement in xmlNodeListData)
+
+                        XmlNodeList xmlNodeListData = xmlDocument.SelectNodes("ContaDeclareInfo/Declaration/Data");
+
+                        foreach (XmlNode xmlNode in xmlNodeListData)
+                        // foreach (XmlNode xmlNode in xmlDocument.SelectSingleNode("ContaDeclareInfo").SelectSingleNode("Declaration").SelectNodes("Data"))
                         {
                             #region 获取Data节点的子节点数据
-                            csaData.ContaId = xmlElement.GetElementsByTagName("ContaId")[0].InnerXml;
-                            csaData.ContaTypeCode = xmlElement.GetElementsByTagName("ContaTypeCode")[0].InnerXml;
-                            csaData.Seat = xmlElement.GetElementsByTagName("Seat")[0].InnerXml;
-                            csaData.TradeMark = xmlElement.GetElementsByTagName("TradeMark")[0].InnerXml;
-                            csaData.IEFlag = xmlElement.GetElementsByTagName("IEFlag")[0].InnerXml;
-                            csaData.ContaMark = xmlElement.GetElementsByTagName("ContaMark")[0].InnerXml;
-                            csaData.LoadMark = xmlElement.GetElementsByTagName("LoadMark")[0].InnerXml;
-                            csaData.DangerMark = xmlElement.GetElementsByTagName("DangerMark")[0].InnerXml;
-                            csaData.EntranceDate = xmlElement.GetElementsByTagName("EntranceDate")[0].InnerXml;
-                            csaData.DeparttureDate = xmlElement.GetElementsByTagName("DeparttureDate")[0].InnerXml;
-                            csaData.WorkMark = xmlElement.GetElementsByTagName("WorkMark")[0].InnerXml;
-                            csaData.DataDealFlag = xmlElement.GetElementsByTagName("DataDealFlag")[0].InnerXml;
-                            csaData.BillNo = xmlElement.GetElementsByTagName("BillNo")[0].InnerXml;
-                            csaData.EntryId = xmlElement.GetElementsByTagName("EntryId")[0].InnerXml;
-                            csaData.PreNo = xmlElement.GetElementsByTagName("PreNo")[0].InnerXml;
-                            csaData.MtApplyBlNo = xmlElement.GetElementsByTagName("MtApplyBlNo")[0].InnerXml;
-                            csaData.Remark = xmlElement.GetElementsByTagName("Remark")[0].InnerXml;
+                            csaData.ContaId = xmlNode.SelectSingleNode("ContaId").InnerText;
+                            csaData.ContaTypeCode = xmlNode.SelectSingleNode("ContaTypeCode").InnerText;
+                            csaData.Seat = xmlNode.SelectSingleNode("Seat").InnerText;
+                            csaData.TradeMark = xmlNode.SelectSingleNode("TradeMark").InnerText;
+                            csaData.IEFlag = xmlNode.SelectSingleNode("IEFlag").InnerText;
+                            csaData.ContaMark = xmlNode.SelectSingleNode("ContaMark").InnerText;
+                            csaData.LoadMark = xmlNode.SelectSingleNode("LoadMark").InnerText;
+                            csaData.DangerMark = xmlNode.SelectSingleNode("DangerMark").InnerText;
+                            csaData.EntranceDate = xmlNode.SelectSingleNode("EntranceDate").InnerText;
+                            csaData.DeparttureDate = xmlNode.SelectSingleNode("DeparttureDate").InnerText;
+                            csaData.WorkMark = xmlNode.SelectSingleNode("WorkMark").InnerText;
+                            csaData.DataDealFlag = xmlNode.SelectSingleNode("DataDealFlag").InnerText;
+                            csaData.BillNo = xmlNode.SelectSingleNode("BillNo").InnerText;
+                            csaData.EntryId = xmlNode.SelectSingleNode("EntryId").InnerText;
+                            csaData.PreNo = xmlNode.SelectSingleNode("PreNo").InnerText;
+                            csaData.MtApplyBlNo = xmlNode.SelectSingleNode("MtApplyBlNo").InnerText;
+                            csaData.Remark = xmlNode.SelectSingleNode("Remark").InnerText;
                             #endregion
 
                             #region 报文中Data节点的部分子节点数据校验
@@ -170,32 +175,32 @@ namespace ContainerMessageForm
                             checkResult += dataCheckRules.CheckDataTradeMark(csaData.TradeMark);
 
                             //校验报文中的Data节点下的IEFlag节点数据
-                            checkResult += dataCheckRules.CheckDataIEFlag(csaData.TradeMark,csaData.IEFlag);
+                            checkResult += dataCheckRules.CheckDataIEFlag(csaData.TradeMark, csaData.IEFlag);
 
                             //校验报文中的Data节点下的LoadMark节点数据
                             checkResult += dataCheckRules.CheckDataLoadMark(csaData.LoadMark);
 
                             //校验报文中的Data节点下的DataDealFlag节点数据
-                            checkResult += dataCheckRules.CheckDataDataDealFlag(csaData.DataDealFlag, csaData.EntranceDate, csaData.DeparttureDate);
+                            checkResult += dataCheckRules.CheckDataDataDealFlag(fileInfo.FullName, csaData.DataDealFlag, csaData.EntranceDate, csaData.DeparttureDate, csaData.ContaId);
 
                             //校验报文中的Data节点下的WorkMark节点数据
                             checkResult += dataCheckRules.CheckDataWorkMark(csaData.WorkMark);
                             #endregion
 
-                            if(string.IsNullOrEmpty(checkResult))
+                            if (string.IsNullOrEmpty(checkResult))
                             {
                                 try
                                 {
                                     DataBaseOperate.InsertDataIntoCsaData(csaData, csaHead.MsgId);
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
                                     logContent.MsgId = csaHead.MsgId;
                                     logContent.FilePath = fileInfo.FullName;
                                     logContent.ContaId = csaData.ContaId;
                                     logContent.ErrorDescription = ex.Message;
                                     log.Error(logContent);
-                                }                               
+                                }
                             }
                             else
                             {
@@ -204,10 +209,11 @@ namespace ContainerMessageForm
                                 logContent.ContaId = csaData.ContaId;
                                 logContent.ErrorDescription = checkResult;
                                 log.Error(logContent);
+
+                                checkResult = string.Empty;
                             }
                         }
-
-                        #endregion
+                       #endregion
                     }
                 }
             }
