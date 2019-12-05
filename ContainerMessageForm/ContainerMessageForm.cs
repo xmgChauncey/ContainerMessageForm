@@ -62,26 +62,6 @@ namespace ContainerMessageForm
             }
         }
 
-        private void ShowPro(int current, int total)
-        {
-            int percentageValue = 0;
-            if (total != 0)
-            {
-                percentageValue = (current * 100 / total);
-            }
-
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new ProgressBarShow(ShowPro), current, total);
-            }
-            else
-            {
-                this.progressBar_DataDealProcess.Value = percentageValue;
-                this.label_DataDealProcess.Text = percentageValue + "% Processing...";
-                this.label_DataDealProcess.Refresh();
-            }
-        }
-
         private void button_StartAnalyze_Click(object sender, EventArgs e)
         {
             DataCheckRules dataCheckRules = new DataCheckRules();
@@ -285,6 +265,9 @@ namespace ContainerMessageForm
             DataGridViewBindData(tableName);
 
             this.button_StartAnalyze.Enabled = true;
+            this.progressBar_DataDealProcess.Value = 0;
+            this.label_DataDealProcess.Text = 0 + "% Processing...";
+            this.label_DataDealProcess.Refresh();
 
         }
 
@@ -324,5 +307,26 @@ namespace ContainerMessageForm
                 System.Diagnostics.Process.Start(@"IExplore.exe", filePath);
             }
         }
+
+        private void ShowPro(int current, int total)
+        {
+            int percentageValue = 0;
+            if (total != 0)
+            {
+                percentageValue = (current * 100 / total);
+            }
+
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new ProgressBarShow(ShowPro), current, total);
+            }
+            else
+            {
+                this.progressBar_DataDealProcess.Value = percentageValue;
+                this.label_DataDealProcess.Text = percentageValue + "% Processing...";
+                this.label_DataDealProcess.Refresh();
+            }
+        }
+
     }
 }
