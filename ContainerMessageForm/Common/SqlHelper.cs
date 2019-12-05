@@ -179,6 +179,30 @@ public abstract class SqlHelper
     }
 
     /// <summary>
+    /// 执行一条查询语句，返回的DataSet
+    /// </summary>
+    /// <param name="connectionString"></param>
+    /// <param name="sqlString"></param>
+    /// <param name="tableName"></param>
+    /// <returns></returns>
+    public static DataSet ExecuteSqlDataAdapter(string connectionString, string sqlString,string tableName)
+    {
+        SqlConnection conn = new SqlConnection(connectionString);
+        try
+        {
+            SqlDataAdapter sda = new SqlDataAdapter(sqlString, conn);
+            DataSet dataSet = new DataSet();
+            sda.Fill(dataSet, tableName);
+            return dataSet;
+        }
+        catch(Exception ex)
+        {
+            conn.Close();
+            throw ex;
+        }
+    }
+
+    /// <summary>
     /// 缓存参数数组
     /// </summary>
     /// <param name="cacheKey">参数缓存的键值</param>

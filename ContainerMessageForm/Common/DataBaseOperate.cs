@@ -72,13 +72,13 @@ FROM
             {
                 string insertSqlStr = string.Format(@"INSERT INTO CsaHead ( GUID, MSGID, MSGTYPE, CUSTOMSCODE, SUPVLOCTCODE, DECLDATE, DECLAREDATATYPE, TOTALMSGNO, CURMSGNO )
 VALUES
-	( NEWID ( ), '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}' )", csaHead.MsgId, csaHead.MsgType, csaHead.CustomsCode, csaHead.SupvLoctCode,csaHead.DeclDate,csaHead.DeclareDataType, csaHead.TotalMsgNo, csaHead.CurMsgNo);
+	( NEWID ( ), '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}' )", csaHead.MsgId, csaHead.MsgType, csaHead.CustomsCode, csaHead.SupvLoctCode, csaHead.DeclDate, csaHead.DeclareDataType, csaHead.TotalMsgNo, csaHead.CurMsgNo);
 
                 SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSqlStr);
             }
         }
 
-        public static void InsertDataIntoCsaData(CsaData csaData,string msgId)
+        public static void InsertDataIntoCsaData(CsaData csaData, string msgId)
         {
             if (csaData != null)
             {
@@ -104,13 +104,37 @@ MTAPPLYBLNO,
 REMARK 
 )
 VALUES
-	( NEWID ( ),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}' ) ", 
-    msgId,csaData.ContaId, csaData.ContaTypeCode, csaData.Seat, csaData.TradeMark, csaData.IEFlag, csaData.ContaMark,
-    csaData.LoadMark,csaData.DangerMark, csaData.EntranceDate, csaData.DeparttureDate, csaData.WorkMark, csaData.DataDealFlag,
+	( NEWID ( ),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}' ) ",
+    msgId, csaData.ContaId, csaData.ContaTypeCode, csaData.Seat, csaData.TradeMark, csaData.IEFlag, csaData.ContaMark,
+    csaData.LoadMark, csaData.DangerMark, csaData.EntranceDate, csaData.DeparttureDate, csaData.WorkMark, csaData.DataDealFlag,
     csaData.BillNo, csaData.EntryId, csaData.PreNo, csaData.MtApplyBlNo, csaData.Remark);
 
                 SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSqlStr);
             }
+        }
+
+        public static void TruncateTable()
+        {
+            string sqlStr = string.Format(@"TRUNCATE TABLE CsaHead;
+TRUNCATE TABLE CsaData;
+TRUNCATE TABLE LogInfo;");
+
+            SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, sqlStr);
+        }
+
+        public static DataSet GetLogInfo(string tableName)
+        {
+            string sqlStr = string.Format(@"SELECT
+	li.MSG_ID AS '报文编码',
+	li.CONTA_ID AS '箱号',
+	li.FILE_PATH AS '文件路径',
+	li.ERROR_DESCRIPTION AS '错误描述' 
+FROM
+	LogInfo li 
+ORDER BY
+	LOG_DATE");
+
+            return SqlHelper.ExecuteSqlDataAdapter(SqlHelper.ConnectionStringLocalTransaction, sqlStr, tableName);
         }
     }
 }
