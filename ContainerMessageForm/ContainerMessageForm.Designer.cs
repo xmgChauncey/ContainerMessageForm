@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label_Floder = new System.Windows.Forms.Label();
             this.textBox_Folder = new System.Windows.Forms.TextBox();
             this.button_OpenFolder = new System.Windows.Forms.Button();
@@ -41,9 +41,9 @@
             this.button_StartAnalyze = new System.Windows.Forms.Button();
             this.groupBox_AnalyzeResultOperate = new System.Windows.Forms.GroupBox();
             this.dataGridView_AnalyzeResult = new System.Windows.Forms.DataGridView();
+            this.button_SearchFileInIE = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button_CleanAnalyzeResult = new System.Windows.Forms.Button();
             this.button_GetAnalyzeResult = new System.Windows.Forms.Button();
-            this.button_SearchFileInIE = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox_FileOperate.SuspendLayout();
             this.groupBox_DataAnalyze.SuspendLayout();
             this.groupBox_AnalyzeResultOperate.SuspendLayout();
@@ -172,10 +172,31 @@
             this.button_SearchFileInIE});
             this.dataGridView_AnalyzeResult.Location = new System.Drawing.Point(8, 61);
             this.dataGridView_AnalyzeResult.Name = "dataGridView_AnalyzeResult";
+            this.dataGridView_AnalyzeResult.ReadOnly = true;
             this.dataGridView_AnalyzeResult.RowTemplate.Height = 23;
             this.dataGridView_AnalyzeResult.Size = new System.Drawing.Size(525, 200);
             this.dataGridView_AnalyzeResult.TabIndex = 2;
             this.dataGridView_AnalyzeResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_AnalyzeResult_CellContentClick);
+            // 
+            // button_SearchFileInIE
+            // 
+            this.button_SearchFileInIE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("楷体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.NullValue = "浏览";
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(4);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Aqua;
+            this.button_SearchFileInIE.DefaultCellStyle = dataGridViewCellStyle1;
+            this.button_SearchFileInIE.FillWeight = 80F;
+            this.button_SearchFileInIE.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button_SearchFileInIE.HeaderText = "操作";
+            this.button_SearchFileInIE.Name = "button_SearchFileInIE";
+            this.button_SearchFileInIE.ReadOnly = true;
+            this.button_SearchFileInIE.Text = "";
+            this.button_SearchFileInIE.Width = 35;
             // 
             // button_CleanAnalyzeResult
             // 
@@ -196,25 +217,6 @@
             this.button_GetAnalyzeResult.Text = "获取分析结果";
             this.button_GetAnalyzeResult.UseVisualStyleBackColor = true;
             this.button_GetAnalyzeResult.Click += new System.EventHandler(this.button_GetAnalyzeResult_Click);
-            // 
-            // button_SearchFileInIE
-            // 
-            this.button_SearchFileInIE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("楷体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.NullValue = "浏览";
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(4);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Aqua;
-            this.button_SearchFileInIE.DefaultCellStyle = dataGridViewCellStyle2;
-            this.button_SearchFileInIE.FillWeight = 80F;
-            this.button_SearchFileInIE.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button_SearchFileInIE.HeaderText = "操作";
-            this.button_SearchFileInIE.Name = "button_SearchFileInIE";
-            this.button_SearchFileInIE.Text = "";
-            this.button_SearchFileInIE.Width = 35;
             // 
             // ContainerMessageForm
             // 
