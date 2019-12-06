@@ -52,12 +52,9 @@ namespace ContainerMessageForm
                     //获取文件夹（不包含子目录）下的xml文件
                     FileInfo[] fileInfoArray = directoryInfo.GetFiles("*.xml");
 
-                    if (fileInfoArray.Length > 0)
-                    {
-                        //获取文件夹（不包含子目录）下的xml文件个数
-                        this.textBox_totalFileCount.Text = fileInfoArray.Length.ToString();
-                        this.textBox_totalFileCount.Refresh();
-                    }
+                    //获取文件夹（不包含子目录）下的xml文件个数
+                    this.textBox_totalFileCount.Text = fileInfoArray.Length.ToString();
+                    this.textBox_totalFileCount.Refresh();
                 }
             }
         }
@@ -69,6 +66,12 @@ namespace ContainerMessageForm
             if (string.IsNullOrEmpty(this.textBox_Folder.Text.Trim()))
             {
                 MessageBox.Show("文件路径为空！");
+                return;
+            }
+
+            if (this.textBox_totalFileCount.Text.Trim() == "0")
+            {
+                MessageBox.Show("当前目录下没有XML文件！");
                 return;
             }
 
@@ -261,7 +264,7 @@ namespace ContainerMessageForm
         {
             DataBaseOperate.TruncateTable();
 
-            string tableName = "LogInfo";           
+            string tableName = "LogInfo";
             DataGridViewBindData(tableName);
 
             this.button_StartAnalyze.Enabled = true;
@@ -275,7 +278,7 @@ namespace ContainerMessageForm
         {
             DataSet ds = DataBaseOperate.GetLogInfo(tableName);
 
-            if(ds.Tables.Count == 1 && ds.Tables[0].Rows.Count == 0)
+            if (ds.Tables.Count == 1 && ds.Tables[0].Rows.Count == 0)
             {
                 this.dataGridView_AnalyzeResult.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
