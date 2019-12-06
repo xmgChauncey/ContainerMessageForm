@@ -22,6 +22,8 @@ namespace ContainerMessageForm
 
         LogContent logContent = new LogContent();
 
+        SqlConnection sqlConnection = new SqlConnection(SqlHelper.ConnectionStringLocalTransaction);
+
         public ContainerMessageForm()
         {
             InitializeComponent();
@@ -148,7 +150,7 @@ namespace ContainerMessageForm
                         try
                         {
                             //报文中Head节点下子节点数据插入CsaHead表中
-                            DataBaseOperate.InsertDataIntoCsaHead(csaHead);
+                            DataBaseOperate.InsertDataIntoCsaHead(sqlConnection,csaHead);
                         }
                         catch (Exception ex)
                         {
@@ -224,7 +226,8 @@ namespace ContainerMessageForm
                         {
                             try
                             {
-                                DataBaseOperate.InsertDataIntoCsaData(csaData, csaHead.MsgId);
+                                DataBaseOperate.InsertDataIntoCsaData(sqlConnection,csaData, csaHead.MsgId);
+                                sqlConnection.Close();
                             }
                             catch (Exception ex)
                             {

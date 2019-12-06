@@ -66,7 +66,7 @@ FROM
             return dic;
         }
 
-        public static void InsertDataIntoCsaHead(CsaHead csaHead)
+        public static void InsertDataIntoCsaHead(SqlConnection conn, CsaHead csaHead)
         {
             if (csaHead != null)
             {
@@ -74,11 +74,11 @@ FROM
 VALUES
 	( NEWID ( ), '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}' )", csaHead.MsgId, csaHead.MsgType, csaHead.CustomsCode, csaHead.SupvLoctCode, csaHead.DeclDate, csaHead.DeclareDataType, csaHead.TotalMsgNo, csaHead.CurMsgNo);
 
-                SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSqlStr);
+                SqlHelper.ExecuteNonQuery(conn, CommandType.Text, insertSqlStr);
             }
         }
 
-        public static void InsertDataIntoCsaData(CsaData csaData, string msgId)
+        public static void InsertDataIntoCsaData(SqlConnection conn, CsaData csaData, string msgId)
         {
             if (csaData != null)
             {
@@ -109,7 +109,7 @@ VALUES
     csaData.LoadMark, csaData.DangerMark, csaData.EntranceDate, csaData.DeparttureDate, csaData.WorkMark, csaData.DataDealFlag,
     csaData.BillNo, csaData.EntryId, csaData.PreNo, csaData.MtApplyBlNo, csaData.Remark);
 
-                SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, insertSqlStr);
+                SqlHelper.ExecuteNonQuery(conn, CommandType.Text, insertSqlStr);
             }
         }
 
