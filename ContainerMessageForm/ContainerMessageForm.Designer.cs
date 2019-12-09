@@ -44,6 +44,7 @@
             this.button_SearchFileInIE = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button_CleanAnalyzeResult = new System.Windows.Forms.Button();
             this.button_GetAnalyzeResult = new System.Windows.Forms.Button();
+            this.button_DeriviveToExcel = new System.Windows.Forms.Button();
             this.groupBox_FileOperate.SuspendLayout();
             this.groupBox_DataAnalyze.SuspendLayout();
             this.groupBox_AnalyzeResultOperate.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             // groupBox_AnalyzeResultOperate
             // 
+            this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_DeriviveToExcel);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.dataGridView_AnalyzeResult);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_CleanAnalyzeResult);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_GetAnalyzeResult);
@@ -174,7 +176,7 @@
             this.dataGridView_AnalyzeResult.Name = "dataGridView_AnalyzeResult";
             this.dataGridView_AnalyzeResult.ReadOnly = true;
             this.dataGridView_AnalyzeResult.RowTemplate.Height = 23;
-            this.dataGridView_AnalyzeResult.Size = new System.Drawing.Size(525, 200);
+            this.dataGridView_AnalyzeResult.Size = new System.Drawing.Size(542, 200);
             this.dataGridView_AnalyzeResult.TabIndex = 2;
             this.dataGridView_AnalyzeResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_AnalyzeResult_CellContentClick);
             // 
@@ -200,7 +202,7 @@
             // 
             // button_CleanAnalyzeResult
             // 
-            this.button_CleanAnalyzeResult.Location = new System.Drawing.Point(274, 20);
+            this.button_CleanAnalyzeResult.Location = new System.Drawing.Point(229, 20);
             this.button_CleanAnalyzeResult.Name = "button_CleanAnalyzeResult";
             this.button_CleanAnalyzeResult.Size = new System.Drawing.Size(88, 23);
             this.button_CleanAnalyzeResult.TabIndex = 1;
@@ -210,13 +212,23 @@
             // 
             // button_GetAnalyzeResult
             // 
-            this.button_GetAnalyzeResult.Location = new System.Drawing.Point(164, 20);
+            this.button_GetAnalyzeResult.Location = new System.Drawing.Point(94, 20);
             this.button_GetAnalyzeResult.Name = "button_GetAnalyzeResult";
-            this.button_GetAnalyzeResult.Size = new System.Drawing.Size(86, 23);
+            this.button_GetAnalyzeResult.Size = new System.Drawing.Size(88, 23);
             this.button_GetAnalyzeResult.TabIndex = 0;
             this.button_GetAnalyzeResult.Text = "获取分析结果";
             this.button_GetAnalyzeResult.UseVisualStyleBackColor = true;
             this.button_GetAnalyzeResult.Click += new System.EventHandler(this.button_GetAnalyzeResult_Click);
+            // 
+            // button_DeriviveToExcel
+            // 
+            this.button_DeriviveToExcel.Location = new System.Drawing.Point(350, 20);
+            this.button_DeriviveToExcel.Name = "button_DeriviveToExcel";
+            this.button_DeriviveToExcel.Size = new System.Drawing.Size(88, 23);
+            this.button_DeriviveToExcel.TabIndex = 3;
+            this.button_DeriviveToExcel.Text = "导出分析结果";
+            this.button_DeriviveToExcel.UseVisualStyleBackColor = true;
+            this.button_DeriviveToExcel.Click += new System.EventHandler(this.button_DeriviveToExcel_Click);
             // 
             // ContainerMessageForm
             // 
@@ -257,6 +269,7 @@
         private System.Windows.Forms.Button button_CleanAnalyzeResult;
         private System.Windows.Forms.Button button_GetAnalyzeResult;
         private System.Windows.Forms.DataGridViewButtonColumn button_SearchFileInIE;
+        private System.Windows.Forms.Button button_DeriviveToExcel;
     }
 }
 
