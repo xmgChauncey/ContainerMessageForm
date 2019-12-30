@@ -215,6 +215,9 @@ namespace ContainerMessageForm
                         //校验报文中的Data节点下的DangerMark节点数据
                         checkResult += dataCheckRules.CheckDataDangerMark(csaData.DangerMark);
 
+                        //校验报文中的Data节点下的EntranceDate节点数据
+                        checkResult += dataCheckRules.CheckDataEntranceDate(csaData.EntranceDate);
+
                         //校验报文中的Data节点下的DataDealFlag节点数据
                         checkResult += dataCheckRules.CheckDataDataDealFlag(fileInfo.FullName, csaData.DataDealFlag, csaData.EntranceDate, csaData.DeparttureDate, csaData.ContaId);
 

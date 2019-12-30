@@ -15,7 +15,7 @@ namespace ContainerMessageForm
         Dictionary<string, string> customsCodeDic = DataBaseOperate.GetNanjingCustomsInfo();
         Dictionary<string, string> declareDataTypeDic = DataBaseOperate.GetCodeAndExplanationByCategory("DeclareDataType");
         Dictionary<string, string> contaTypeCodeDic = DataBaseOperate.GetCodeAndExplanationByCategory("ContaTypeCode");
-        Dictionary<string, string>tradeMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("TradeMark");
+        Dictionary<string, string> tradeMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("TradeMark");
         Dictionary<string, string> iEFlagDic = DataBaseOperate.GetCodeAndExplanationByCategory("IEFlag");
         Dictionary<string, string> loadMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("LoadMark");
         Dictionary<string, string> workMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("WorkMark");
@@ -92,7 +92,7 @@ namespace ContainerMessageForm
 
             if (!msgTypeDic.Keys.Contains(msgType))
             {
-                checkResult = "发送的报文类型不正确："+msgType+"。";
+                checkResult = "发送的报文类型不正确：" + msgType + "。";
             }
             return checkResult;
         }
@@ -114,7 +114,7 @@ namespace ContainerMessageForm
 
             if (!customsCodeDic.Keys.Contains(customsCode))
             {
-                checkResult += "发送报文的海关代码非南京关区："+customsCode+"。";
+                checkResult += "发送报文的海关代码非南京关区：" + customsCode + "。";
             }
             return checkResult;
         }
@@ -136,7 +136,7 @@ namespace ContainerMessageForm
 
             if (!supvLoctInfo.Keys.Contains(supvLoctCode))
             {
-                checkResult += "报文中的作业场所代码未备案："+supvLoctCode+"。";
+                checkResult += "报文中的作业场所代码未备案：" + supvLoctCode + "。";
             }
             return checkResult;
         }
@@ -162,8 +162,8 @@ namespace ContainerMessageForm
             }
             catch (Exception ex)
             {
-                checkResult += "报文中报文发送时间的格式不对："+declDate+"。" + ex.Message+"。";
-            }           
+                checkResult += "报文中报文发送时间的格式不对：" + declDate + "。" + ex.Message + "。";
+            }
             return checkResult;
         }
 
@@ -184,7 +184,7 @@ namespace ContainerMessageForm
 
             if (!declareDataTypeDic.Keys.Contains(declareDataType))
             {
-                checkResult += "报文中的申报数据类型不是全量或者增量："+declareDataType+"。";
+                checkResult += "报文中的申报数据类型不是全量或者增量：" + declareDataType + "。";
             }
             return checkResult;
         }
@@ -209,18 +209,18 @@ namespace ContainerMessageForm
                 //数字组成校验
                 if (!CommFuction.CheckIsNumber(totalMsgNo))
                 {
-                    checkResult += "发送的报文中TotalMsgNo字段值包含非数字字符："+totalMsgNo+"。";
+                    checkResult += "发送的报文中TotalMsgNo字段值包含非数字字符：" + totalMsgNo + "。";
                 }
                 else
                 {
                     //发送的报文数量校验
                     if (!totalMsgNo.Equals(filesCount))
                     {
-                        checkResult += "报文发送的数量少于总数："+totalMsgNo+"。";
+                        checkResult += "报文发送的数量少于总数：" + totalMsgNo + "。";
                     }
                 }
             }
-           
+
             return checkResult;
         }
 
@@ -244,7 +244,7 @@ namespace ContainerMessageForm
                 //数字组成校验
                 if (!CommFuction.CheckIsNumber(curMsgNo))
                 {
-                    checkResult += "发送的报文中CurMsgNo字段值包含非数字字符："+curMsgNo+"。";
+                    checkResult += "发送的报文中CurMsgNo字段值包含非数字字符：" + curMsgNo + "。";
                 }
                 else
                 {
@@ -253,7 +253,7 @@ namespace ContainerMessageForm
                     {
                         if (!(int.Parse(curMsgNo) > 0 && int.Parse(curMsgNo) <= int.Parse(totalMsgNo)))
                         {
-                            checkResult += "发送报文中的CurMsgNo填写不正确："+curMsgNo+"。";
+                            checkResult += "发送报文中的CurMsgNo填写不正确：" + curMsgNo + "。";
                         }
                     }
                     catch (Exception ex)
@@ -285,9 +285,9 @@ namespace ContainerMessageForm
             }
             else
             {
-                if(!CommFuction.CheckIsNumberAndLetter(contaId))
+                if (!CommFuction.CheckIsNumberAndLetter(contaId))
                 {
-                    checkResult += "该集装箱的ContaId中包含非数字和字母的字符："+contaId+"。";
+                    checkResult += "该集装箱的ContaId中包含非数字和字母的字符：" + contaId + "。";
                 }
             }
 
@@ -304,15 +304,15 @@ namespace ContainerMessageForm
             string checkResult = string.Empty;
 
             //是否为空校验
-            if(string.IsNullOrEmpty(contaTypeCode))
+            if (string.IsNullOrEmpty(contaTypeCode))
             {
                 checkResult += "该集装箱的的ContaTypeCode节点值为空";
             }
             else
             {
-                if(!contaTypeCodeDic.Keys.Contains(contaTypeCode))
+                if (!contaTypeCodeDic.Keys.Contains(contaTypeCode))
                 {
-                    checkResult += "该集装箱的的ContaTypeCode节点值不是标准的集装箱尺寸："+contaTypeCode+"。";
+                    checkResult += "该集装箱的的ContaTypeCode节点值不是标准的集装箱尺寸：" + contaTypeCode + "。";
                 }
             }
 
@@ -328,15 +328,15 @@ namespace ContainerMessageForm
         {
             string checkResult = string.Empty;
 
-            if(string.IsNullOrEmpty(seat))
+            if (string.IsNullOrEmpty(seat))
             {
                 checkResult += "该集装箱的的Seat节点值为空";
             }
             else
             {
-                if(!CommFuction.CheckSeat(seat))
+                if (!CommFuction.CheckSeat(seat))
                 {
-                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9A~Z中的数字："+seat+"。";
+                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9A~Z中的数字：" + seat + "。";
                 }
             }
             return checkResult;
@@ -360,7 +360,7 @@ namespace ContainerMessageForm
             {
                 if (!tradeMarkDic.Keys.Contains(tradeMark))
                 {
-                    checkResult += "该集装箱的的TradeMark节点值不是D、I或者O："+tradeMark+"。";
+                    checkResult += "该集装箱的的TradeMark节点值不是D、I或者O：" + tradeMark + "。";
                 }
             }
             return checkResult;
@@ -372,22 +372,22 @@ namespace ContainerMessageForm
         /// <param name="tradeMark"></param>
         /// <param name="iEFlag"></param>
         /// <returns></returns>
-        public string CheckDataIEFlag(string tradeMark,string iEFlag)
+        public string CheckDataIEFlag(string tradeMark, string iEFlag)
         {
             string checkResult = string.Empty;
-            if(tradeMark.Equals("I"))
+            if (tradeMark.Equals("I"))
             {
-                if(string.IsNullOrEmpty(iEFlag))
+                if (string.IsNullOrEmpty(iEFlag))
                 {
                     checkResult += "当集装箱为外贸时，进出口标识不能为空。";
                 }
             }
 
-            if(!string.IsNullOrEmpty(iEFlag))
+            if (!string.IsNullOrEmpty(iEFlag))
             {
-                if(!iEFlagDic.Keys.Contains(iEFlag))
+                if (!iEFlagDic.Keys.Contains(iEFlag))
                 {
-                    checkResult += "该集装箱的的IEFlag节点值不是I或者E："+iEFlag+"。";
+                    checkResult += "该集装箱的的IEFlag节点值不是I或者E：" + iEFlag + "。";
                 }
             }
             return checkResult;
@@ -401,15 +401,15 @@ namespace ContainerMessageForm
         public string CheckDataLoadMark(string loadMark)
         {
             string checkResult = string.Empty;
-            if(string.IsNullOrEmpty(loadMark))
+            if (string.IsNullOrEmpty(loadMark))
             {
                 checkResult += "该集装箱的的LoadMark节点值为空。";
             }
             else
             {
-                if(!loadMarkDic.Keys.Contains(loadMark))
+                if (!loadMarkDic.Keys.Contains(loadMark))
                 {
-                    checkResult += "该集装箱的的LoadMark节点值不是E或者F：" + loadMark+"。";
+                    checkResult += "该集装箱的的LoadMark节点值不是E或者F：" + loadMark + "。";
                 }
             }
             return checkResult;
@@ -441,16 +441,41 @@ namespace ContainerMessageForm
         public string CheckDataWorkMark(string workMark)
         {
             string checkResult = string.Empty;
-            if(string.IsNullOrEmpty(workMark))
+            if (string.IsNullOrEmpty(workMark))
             {
                 checkResult += "该集装箱的的WorkMark节点值为空。";
             }
             else
             {
-                if(!workMarkDic.Keys.Contains(workMark))
+                if (!workMarkDic.Keys.Contains(workMark))
                 {
-                    checkResult += "该集装箱的的WorkMark节点值不是A、B、C、D、E或者F："+workMark+"。";
+                    checkResult += "该集装箱的的WorkMark节点值不是A、B、C、D、E或者F：" + workMark + "。";
                 }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        ///  校验报文中Data节点下EntranceDate节点数据
+        /// </summary>
+        /// <param name="entranceDate"></param>
+        /// <returns></returns>
+        public string CheckDataEntranceDate(string entranceDate)
+        {
+            string checkResult = string.Empty;
+
+            //是否为空校验
+            if (string.IsNullOrEmpty(entranceDate))
+            {
+                checkResult += "发送的报文中EntranceDate字段值为空";
+            }
+            try
+            {
+                DateTime.ParseExact(entranceDate, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+            }
+            catch (Exception ex)
+            {
+                checkResult += "集装箱进场时间的格式不对：" + entranceDate + "。" + ex.Message + "。";
             }
             return checkResult;
         }
@@ -462,35 +487,31 @@ namespace ContainerMessageForm
         /// <param name="entranceDate"></param>
         /// <param name="departtureDate"></param>
         /// <returns></returns>
-        public string CheckDataDataDealFlag(string filePath,string dataDealFlag,string entranceDate,string departtureDate,string contaId)
+        public string CheckDataDataDealFlag(string filePath, string dataDealFlag, string entranceDate, string departtureDate, string contaId)
         {
             string checkResult = string.Empty;
-            if(string.IsNullOrEmpty(dataDealFlag))
+            if (string.IsNullOrEmpty(dataDealFlag))
             {
                 checkResult += "该集装箱的的DataDealFlag节点值为空。";
             }
             else
             {
-                if(!dataDealFlagDic.Keys.Contains(dataDealFlag))
+                if (!dataDealFlagDic.Keys.Contains(dataDealFlag))
                 {
-                    checkResult += "该集装箱的的DataDealFlag节点值不是A、M或者D："+dataDealFlag+"。";
+                    checkResult += "该集装箱的的DataDealFlag节点值不是A、M或者D：" + dataDealFlag + "。";
                 }
                 else
                 {
-                    switch(dataDealFlag)
+                    switch (dataDealFlag)
                     {
                         case "D":
-                            if(string.IsNullOrEmpty(entranceDate)&&string.IsNullOrEmpty(departtureDate))
+                            if (string.IsNullOrEmpty(departtureDate))
                             {
-                                checkResult += "当该集装箱的的DataDealFlag为D时，进出场时间不能为空。";
+                                checkResult += "当该集装箱的的DataDealFlag为D时，出场时间不能为空。";
                             }
                             break;
                         default:
-                            if(string.IsNullOrEmpty(entranceDate))
-                            {
-                                checkResult += "该集装箱的的EntranceDate节点值不能为空。";
-                            }
-                            if(!string.IsNullOrEmpty(departtureDate))
+                            if (!string.IsNullOrEmpty(departtureDate))
                             {
                                 checkResult += "当该集装箱的的DataDealFlag为A或者M时，该集装箱的的DeparttureDate节点值应该为空。";
                             }
