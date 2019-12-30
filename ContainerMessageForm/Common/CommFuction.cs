@@ -51,8 +51,8 @@ namespace ContainerMessageForm.Common
         /// <returns></returns>
         public  static bool CheckSeat(string seat)
         {
-            //Regex regex = new Regex(@"^[A-Z0-9]{2}/[A-Z0-9]{3}/[A-Z0-9]{3}/[A-Z0-9]{2}$");
-            Regex regex = new Regex(@"^[0-9]{2}/[0-9]{3}/[0-9]{3}/[0-9]{2}$");
+            Regex regex = new Regex(@"^[A-Z0-9]{2}/[A-Z0-9]{3}/[A-Z0-9]{3}/[A-Z0-9]{2}$");
+            //Regex regex = new Regex(@"^[0-9]{2}/[0-9]{3}/[0-9]{3}/[0-9]{2}$");
             if (string.IsNullOrEmpty(seat))
             {
                 return false;

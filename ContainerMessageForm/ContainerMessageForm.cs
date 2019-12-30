@@ -1,14 +1,9 @@
 ﻿using ContainerMessageForm.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -100,6 +95,8 @@ namespace ContainerMessageForm
 
                 foreach (FileInfo fileInfo in fileInfoArray)
                 {
+                    Thread.Sleep(100);
+
                     string checkResult = string.Empty;
 
                     currentNumber++;
@@ -214,6 +211,9 @@ namespace ContainerMessageForm
 
                         //校验报文中的Data节点下的LoadMark节点数据
                         checkResult += dataCheckRules.CheckDataLoadMark(csaData.LoadMark);
+
+                        //校验报文中的Data节点下的DangerMark节点数据
+                        checkResult += dataCheckRules.CheckDataDangerMark(csaData.DangerMark);
 
                         //校验报文中的Data节点下的DataDealFlag节点数据
                         checkResult += dataCheckRules.CheckDataDataDealFlag(fileInfo.FullName, csaData.DataDealFlag, csaData.EntranceDate, csaData.DeparttureDate, csaData.ContaId);

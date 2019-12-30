@@ -20,6 +20,7 @@ namespace ContainerMessageForm
         Dictionary<string, string> loadMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("LoadMark");
         Dictionary<string, string> workMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("WorkMark");
         Dictionary<string, string> dataDealFlagDic = DataBaseOperate.GetCodeAndExplanationByCategory("DataDealFlag");
+        Dictionary<string, string> dangerMarkDic = DataBaseOperate.GetCodeAndExplanationByCategory("DangerMark");
 
         #region 报文中Head节点的子节点校验
         /// <summary>
@@ -335,7 +336,7 @@ namespace ContainerMessageForm
             {
                 if(!CommFuction.CheckSeat(seat))
                 {
-                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9中的数字："+seat+"。";
+                    checkResult += "该集装箱的的Seat节点值组成结构应该为‘xx/xxx/xxx/xx’，其中x标识0~9A~Z中的数字："+seat+"。";
                 }
             }
             return checkResult;
@@ -408,7 +409,25 @@ namespace ContainerMessageForm
             {
                 if(!loadMarkDic.Keys.Contains(loadMark))
                 {
-                    checkResult += "该集装箱的的IEFlag节点值不是E或者F："+loadMark+"。";
+                    checkResult += "该集装箱的的LoadMark节点值不是E或者F：" + loadMark+"。";
+                }
+            }
+            return checkResult;
+        }
+
+        /// <summary>
+        /// 校验报文中Data节点下DangerMark节点数据
+        /// </summary>
+        /// <param name="dangerMark"></param>
+        /// <returns></returns>
+        public string CheckDataDangerMark(string dangerMark)
+        {
+            string checkResult = string.Empty;
+            if (!string.IsNullOrEmpty(dangerMark))
+            {
+                if (!dangerMarkDic.Keys.Contains(dangerMark))
+                {
+                    checkResult += "该集装箱的的DangerMark节点值不是0或者W：" + dangerMark + "。";
                 }
             }
             return checkResult;
