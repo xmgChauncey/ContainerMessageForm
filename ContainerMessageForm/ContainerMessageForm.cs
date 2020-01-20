@@ -1,4 +1,7 @@
 ﻿using ContainerMessageForm.Common;
+using NPOI.HPSF;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -340,6 +343,73 @@ namespace ContainerMessageForm
         private void button_DeriviveToExcel_Click(object sender, EventArgs e)
         {
             CommFuction.DataGridViewToExcel(this.dataGridView_AnalyzeResult);
+        }
+
+        private void button_CreateExcel_Click(object sender, EventArgs e)
+        {
+            IWorkbook workbook = null;
+            ISheet sheet = null;
+            IRow row = null;
+            ICell cell = null;
+
+            #region 框架学习
+            //HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
+            //DocumentSummaryInformation documentSummaryInformation =PropertySetFactory.CreateDocumentSummaryInformation() ;
+            //documentSummaryInformation.Company = "Deyou";
+
+            //SummaryInformation summaryInformation = PropertySetFactory.CreateSummaryInformation();
+            //summaryInformation.Author = "XMG";
+
+            //hSSFWorkbook.DocumentSummaryInformation = documentSummaryInformation;
+            //hSSFWorkbook.SummaryInformation = summaryInformation;
+
+            //HSSFSheet hSSFSheet=(HSSFSheet) hSSFWorkbook.CreateSheet("Sheet1");
+
+            //HSSFRow row1 = (HSSFRow)hSSFSheet.CreateRow(0);
+            //row1.CreateCell(0).SetCellValue(1);
+
+            //HSSFPatriarch hSSFPatriarch =(HSSFPatriarch) hSSFSheet.CreateDrawingPatriarch();
+            //HSSFComment hSSFComment = hSSFPatriarch.CreateComment(new HSSFClientAnchor(0,0,0,0,1,2,4,4));
+            //hSSFComment.String = new HSSFRichTextString("Hello World");
+            //hSSFComment.Author = "XMG";
+
+            //HSSFCell hSSFCell =(HSSFCell) hSSFSheet.CreateRow(1).CreateCell(1);
+            //hSSFCell.CellComment = hSSFComment;
+
+            //HSSFCell hSSFCellTime = (HSSFCell)hSSFSheet.CreateRow(2).CreateCell(1);
+            //hSSFCellTime.SetCellValue(new DateTime(2020,01,17));
+            //HSSFCellStyle hSSFCellStyle =(HSSFCellStyle) hSSFWorkbook.CreateCellStyle();
+            //HSSFDataFormat hSSFDataFormat =(HSSFDataFormat) hSSFWorkbook.CreateDataFormat();
+            //hSSFCellStyle.DataFormat = hSSFDataFormat.GetFormat("yyyy年MM月dd日");
+            //hSSFCellTime.CellStyle = hSSFCellStyle;
+
+            //HSSFCell hSSFCellMoney = (HSSFCell)hSSFSheet.CreateRow(3).CreateCell(1);
+            //hSSFCellMoney.SetCellValue(2000);
+            //HSSFCellStyle hSSFCellStyleMoney = (HSSFCellStyle)hSSFWorkbook.CreateCellStyle();
+            //HSSFDataFormat hSSFDataFormatMoney = (HSSFDataFormat)hSSFWorkbook.CreateDataFormat();
+            //hSSFCellStyleMoney.DataFormat = hSSFDataFormatMoney.GetFormat("￥#,##0");
+            //hSSFCellMoney.CellStyle = hSSFCellStyleMoney;
+
+            //HSSFCell hSSFCellRange = (HSSFCell)hSSFSheet.CreateRow(4).CreateCell(1);
+            //hSSFCellRange.SetCellValue("Sales Report");
+            //HSSFCellStyle hSSFCellStyleRange = (HSSFCellStyle)hSSFWorkbook.CreateCellStyle();
+            //hSSFCellStyleRange.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            //HSSFFont hSSFFontRange = (HSSFFont)hSSFWorkbook.CreateFont();
+            //hSSFFontRange.FontHeight = 20 * 20;
+            //hSSFCellStyleRange.SetFont(hSSFFontRange);
+            //hSSFCellRange.CellStyle = hSSFCellStyleRange;
+
+
+
+            //hSSFSheet.Header.Center = "This is the PageHeader";
+            //hSSFSheet.Footer.Left = "Copyright   Deyou";
+            //hSSFSheet.Footer.Right = "created by XMG";           
+
+            //FileStream fileStream = new FileStream(@"test.xls", FileMode.Create);
+            //hSSFWorkbook.Write(fileStream);
+            //fileStream.Close();
+            //MessageBox.Show("Excel文件创建成功！");
+            #endregion
         }
     }
 }

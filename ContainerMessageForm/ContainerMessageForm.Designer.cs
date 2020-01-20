@@ -40,11 +40,12 @@
             this.groupBox_DataAnalyze = new System.Windows.Forms.GroupBox();
             this.button_StartAnalyze = new System.Windows.Forms.Button();
             this.groupBox_AnalyzeResultOperate = new System.Windows.Forms.GroupBox();
+            this.button_DeriviveToExcel = new System.Windows.Forms.Button();
             this.dataGridView_AnalyzeResult = new System.Windows.Forms.DataGridView();
             this.button_SearchFileInIE = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button_CleanAnalyzeResult = new System.Windows.Forms.Button();
             this.button_GetAnalyzeResult = new System.Windows.Forms.Button();
-            this.button_DeriviveToExcel = new System.Windows.Forms.Button();
+            this.button_CreateExcel = new System.Windows.Forms.Button();
             this.groupBox_FileOperate.SuspendLayout();
             this.groupBox_DataAnalyze.SuspendLayout();
             this.groupBox_AnalyzeResultOperate.SuspendLayout();
@@ -148,6 +149,7 @@
             // 
             // groupBox_AnalyzeResultOperate
             // 
+            this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_CreateExcel);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_DeriviveToExcel);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.dataGridView_AnalyzeResult);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_CleanAnalyzeResult);
@@ -158,6 +160,16 @@
             this.groupBox_AnalyzeResultOperate.TabIndex = 9;
             this.groupBox_AnalyzeResultOperate.TabStop = false;
             this.groupBox_AnalyzeResultOperate.Text = "分析结果操作";
+            // 
+            // button_DeriviveToExcel
+            // 
+            this.button_DeriviveToExcel.Location = new System.Drawing.Point(350, 20);
+            this.button_DeriviveToExcel.Name = "button_DeriviveToExcel";
+            this.button_DeriviveToExcel.Size = new System.Drawing.Size(88, 23);
+            this.button_DeriviveToExcel.TabIndex = 3;
+            this.button_DeriviveToExcel.Text = "导出分析结果";
+            this.button_DeriviveToExcel.UseVisualStyleBackColor = true;
+            this.button_DeriviveToExcel.Click += new System.EventHandler(this.button_DeriviveToExcel_Click);
             // 
             // dataGridView_AnalyzeResult
             // 
@@ -220,15 +232,15 @@
             this.button_GetAnalyzeResult.UseVisualStyleBackColor = true;
             this.button_GetAnalyzeResult.Click += new System.EventHandler(this.button_GetAnalyzeResult_Click);
             // 
-            // button_DeriviveToExcel
+            // button_CreateExcel
             // 
-            this.button_DeriviveToExcel.Location = new System.Drawing.Point(350, 20);
-            this.button_DeriviveToExcel.Name = "button_DeriviveToExcel";
-            this.button_DeriviveToExcel.Size = new System.Drawing.Size(88, 23);
-            this.button_DeriviveToExcel.TabIndex = 3;
-            this.button_DeriviveToExcel.Text = "导出分析结果";
-            this.button_DeriviveToExcel.UseVisualStyleBackColor = true;
-            this.button_DeriviveToExcel.Click += new System.EventHandler(this.button_DeriviveToExcel_Click);
+            this.button_CreateExcel.Location = new System.Drawing.Point(465, 20);
+            this.button_CreateExcel.Name = "button_CreateExcel";
+            this.button_CreateExcel.Size = new System.Drawing.Size(75, 23);
+            this.button_CreateExcel.TabIndex = 4;
+            this.button_CreateExcel.Text = "创建Excel";
+            this.button_CreateExcel.UseVisualStyleBackColor = true;
+            this.button_CreateExcel.Click += new System.EventHandler(this.button_CreateExcel_Click);
             // 
             // ContainerMessageForm
             // 
@@ -270,6 +282,7 @@
         private System.Windows.Forms.Button button_GetAnalyzeResult;
         private System.Windows.Forms.DataGridViewButtonColumn button_SearchFileInIE;
         private System.Windows.Forms.Button button_DeriviveToExcel;
+        private System.Windows.Forms.Button button_CreateExcel;
     }
 }
 
