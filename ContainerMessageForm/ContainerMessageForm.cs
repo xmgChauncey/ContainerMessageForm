@@ -347,10 +347,35 @@ namespace ContainerMessageForm
 
         private void button_CreateExcel_Click(object sender, EventArgs e)
         {
+            //Excel操作对象
             IWorkbook workbook = null;
             ISheet sheet = null;
             IRow row = null;
             ICell cell = null;
+
+            //获取数据
+            string tableName = "LogInfo";
+            DataSet dataSet = DataBaseOperate.GetLogInfo(tableName);
+            if(dataSet!=null)
+            {
+                DataTable dataTable = dataSet.Tables[tableName];
+
+                try
+                {
+                    if(dataTable!=null && dataTable.Rows.Count>0)
+                    {
+                        workbook = new HSSFWorkbook();
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("没有数据！");
+            }                   
 
             #region 框架学习
             //HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
