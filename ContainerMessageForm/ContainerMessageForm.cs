@@ -150,7 +150,7 @@ namespace ContainerMessageForm
                         try
                         {
                             //报文中Head节点下子节点数据插入CsaHead表中
-                            DataBaseOperate.InsertDataIntoCsaHead(sqlConnection,csaHead);
+                            DataBaseOperate.InsertDataIntoCsaHead(sqlConnection, csaHead);
                         }
                         catch (Exception ex)
                         {
@@ -232,7 +232,7 @@ namespace ContainerMessageForm
                         {
                             try
                             {
-                                DataBaseOperate.InsertDataIntoCsaData(sqlConnection,csaData, csaHead.MsgId);
+                                DataBaseOperate.InsertDataIntoCsaData(sqlConnection, csaData, csaHead.MsgId);
                                 sqlConnection.Close();
                             }
                             catch (Exception ex)
@@ -342,41 +342,20 @@ namespace ContainerMessageForm
 
         private void button_DeriviveToExcel_Click(object sender, EventArgs e)
         {
-            CommFuction.DataGridViewToExcel(this.dataGridView_AnalyzeResult);
+            //获取数据
+            DataTable dataTable = null;
+            string tableName = "LogInfo";
+            DataSet dataSet = DataBaseOperate.GetLogInfo(tableName);
+            if (dataSet != null && dataSet.Tables.Count > 0)
+            {
+                dataTable = dataSet.Tables[tableName];
+            }
+
+            CommFuction.DataGridViewToExcel(dataTable);
         }
 
         private void button_CreateExcel_Click(object sender, EventArgs e)
-        {
-            //Excel操作对象
-            IWorkbook workbook = null;
-            ISheet sheet = null;
-            IRow row = null;
-            ICell cell = null;
-
-            //获取数据
-            string tableName = "LogInfo";
-            DataSet dataSet = DataBaseOperate.GetLogInfo(tableName);
-            if(dataSet!=null)
-            {
-                DataTable dataTable = dataSet.Tables[tableName];
-
-                try
-                {
-                    if(dataTable!=null && dataTable.Rows.Count>0)
-                    {
-                        workbook = new HSSFWorkbook();
-                    }
-                }
-                catch(Exception ex)
-                {
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("没有数据！");
-            }                   
-
+        {           
             #region 框架学习
             //HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
             //DocumentSummaryInformation documentSummaryInformation =PropertySetFactory.CreateDocumentSummaryInformation() ;

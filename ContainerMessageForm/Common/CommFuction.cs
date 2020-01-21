@@ -1,5 +1,8 @@
-﻿using System;
+﻿using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +24,7 @@ namespace ContainerMessageForm.Common
         {
             Regex regex = new Regex(@"^[0-9]*$");
 
-            if(string.IsNullOrEmpty(checkedNumberString))
+            if (string.IsNullOrEmpty(checkedNumberString))
             {
                 return false;
             }
@@ -49,7 +52,7 @@ namespace ContainerMessageForm.Common
         /// </summary>
         /// <param name="seat"></param>
         /// <returns></returns>
-        public  static bool CheckSeat(string seat)
+        public static bool CheckSeat(string seat)
         {
             Regex regex = new Regex(@"^[A-Z0-9]{2}/[A-Z0-9]{3}/[A-Z0-9]{3}/[A-Z0-9]{2}$");
             //Regex regex = new Regex(@"^[0-9]{2}/[0-9]{3}/[0-9]{3}/[0-9]{2}$");
@@ -202,7 +205,85 @@ namespace ContainerMessageForm.Common
             }
             MessageBox.Show(fileNameString + "\n\n导出完毕!", "提示 ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        #endregion
+
+        public static void DataGridViewToExcel(DataTable dataTable)
+        {
+
+            #region 创建保存的Excel文件
+            //申明保存对话框
+            SaveFileDialog dlg = new SaveFileDialog();
+            //文件后缀列表
+            dlg.Filter = "Excel(*.xls)|*.xls";
+            //默认路径是系统当前路径
+            dlg.InitialDirectory = Directory.GetCurrentDirectory();
+            //打开保存对话框
+            if (dlg.ShowDialog() == DialogResult.Cancel) return;
+            //返回文件路径
+            string fileNameString = dlg.FileName;
+            //验证strFileName是否为空或值无效
+            if (fileNameString.Trim() == " ")
+            { return; }
+            #endregion
+
+            //Excel操作对象
+            IWorkbook workbook = null;
+            ISheet sheet = null;
+            IRow row = null;
+            ICell cell = null;
+            FileStream fileStream = null;
+
+            try
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    workbook = new HSSFWorkbook();
+
+                    //Excel表中创建"sheet0"
+                    sheet = workbook.CreateSheet("sheet0");
+                    //行数
+                    int rowCount = dataTable.Rows.Count;
+                    //列数
+                    int columnCount = dataTable.Columns.Count;
+                    //设置列头
+                    row = sheet.CreateRow(0);
+                    for (int c = 0; c < columnCount; c++)
+                    {
+                        cell = row.CreateCell(c);
+                        cell.SetCellValue(dataTable.Columns[c].ColumnName);
+                    }
+
+                    //设置每行每列数据
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        //第二行开始写入数据
+                        row = sheet.CreateRow(i + 1);
+                        for (int j = 0; j < columnCount; j++)
+                        {
+                            cell = row.CreateCell(j);
+                            cell.SetCellValue(dataTable.Rows[i][j].ToString());
+                        }
+                    }
+
+                    using (fileStream = new FileStream(fileNameString, FileMode.OpenOrCreate))
+                    {
+                        workbook.Write(fileStream);
+                        fileStream.Close();
+                        MessageBox.Show("Excel文件创建成功！");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("没有数据！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误："+ex.Message);
+            }
         }
+        #endregion
+    }
+
+
     #endregion
 }

@@ -45,7 +45,6 @@
             this.button_SearchFileInIE = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button_CleanAnalyzeResult = new System.Windows.Forms.Button();
             this.button_GetAnalyzeResult = new System.Windows.Forms.Button();
-            this.button_CreateExcel = new System.Windows.Forms.Button();
             this.groupBox_FileOperate.SuspendLayout();
             this.groupBox_DataAnalyze.SuspendLayout();
             this.groupBox_AnalyzeResultOperate.SuspendLayout();
@@ -149,7 +148,6 @@
             // 
             // groupBox_AnalyzeResultOperate
             // 
-            this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_CreateExcel);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_DeriviveToExcel);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.dataGridView_AnalyzeResult);
             this.groupBox_AnalyzeResultOperate.Controls.Add(this.button_CleanAnalyzeResult);
@@ -232,16 +230,6 @@
             this.button_GetAnalyzeResult.UseVisualStyleBackColor = true;
             this.button_GetAnalyzeResult.Click += new System.EventHandler(this.button_GetAnalyzeResult_Click);
             // 
-            // button_CreateExcel
-            // 
-            this.button_CreateExcel.Location = new System.Drawing.Point(465, 20);
-            this.button_CreateExcel.Name = "button_CreateExcel";
-            this.button_CreateExcel.Size = new System.Drawing.Size(75, 23);
-            this.button_CreateExcel.TabIndex = 4;
-            this.button_CreateExcel.Text = "创建Excel";
-            this.button_CreateExcel.UseVisualStyleBackColor = true;
-            this.button_CreateExcel.Click += new System.EventHandler(this.button_CreateExcel_Click);
-            // 
             // ContainerMessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -282,7 +270,6 @@
         private System.Windows.Forms.Button button_GetAnalyzeResult;
         private System.Windows.Forms.DataGridViewButtonColumn button_SearchFileInIE;
         private System.Windows.Forms.Button button_DeriviveToExcel;
-        private System.Windows.Forms.Button button_CreateExcel;
     }
 }
 
