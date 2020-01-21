@@ -238,37 +238,53 @@ namespace ContainerMessageForm.Common
                 {
                     workbook = new HSSFWorkbook();
 
-                    //Excel表中创建"sheet0"
-                    sheet = workbook.CreateSheet("sheet0");
+                    int starRow = 0;
+                    int endRow = 65535;
+
                     //行数
                     int rowCount = dataTable.Rows.Count;
                     //列数
                     int columnCount = dataTable.Columns.Count;
-                    //设置列头
-                    row = sheet.CreateRow(0);
-                    for (int c = 0; c < columnCount; c++)
-                    {
-                        cell = row.CreateCell(c);
-                        cell.SetCellValue(dataTable.Columns[c].ColumnName);
-                    }
 
-                    //设置每行每列数据
-                    for (int i = 0; i < rowCount; i++)
+                    //Excel文件中的sheet数量
+                    int sheetNum = dataTable.Rows.Count / 65535;
+                    for (int m = 0; m <= sheetNum; m++)
                     {
-                        //第二行开始写入数据
-                        row = sheet.CreateRow(i + 1);
-                        for (int j = 0; j < columnCount; j++)
+                        //Excel表中创建"sheet"
+                        sheet = workbook.CreateSheet("sheet"+m);
+
+                        //设置列头
+                        row = sheet.CreateRow(0);
+                        for (int c = 0; c < columnCount; c++)
                         {
-                            cell = row.CreateCell(j);
-                            cell.SetCellValue(dataTable.Rows[i][j].ToString());
+                            cell = row.CreateCell(c);
+                            cell.SetCellValue(dataTable.Columns[c].ColumnName);
+                        }
+
+                        starRow = m * 65535;
+
+                        if (m==sheetNum)
+                        {
+                            endRow = rowCount - starRow;
+                        }
+
+                        //设置每行每列数据
+                        for (int i = 0; i < endRow; i++)
+                        {
+                            //第二行开始写入数据
+                            row = sheet.CreateRow(i + 1);
+                            for (int j = 0; j < columnCount; j++)
+                            {
+                                cell = row.CreateCell(j);
+                                cell.SetCellValue(dataTable.Rows[starRow+ i][j].ToString());
+                            }
                         }
                     }
-
-                    using (fileStream = new FileStream(fileNameString, FileMode.OpenOrCreate))
+                    using (fileStream = new FileStream(fileNameString, FileMode.Create))
                     {
                         workbook.Write(fileStream);
                         fileStream.Close();
-                        MessageBox.Show("Excel文件创建成功！");
+                        MessageBox.Show(fileNameString + "\n\n导出完毕!", "提示 ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
